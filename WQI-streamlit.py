@@ -61,7 +61,7 @@ st.markdown(
 )
 
 
-st.image("images/elgressy_one_logo.png")
+st.image("images/elgressy_one_logo-2.png")
 
 
 html_temp = """
@@ -69,7 +69,7 @@ html_temp = """
 <h1 style="color:white;text-align:center;">WATER QUALITY PREDICTOR </h1>
 </div>
 """
-#st.image("images/LVR_tech_logo.png")
+
 st.markdown(html_temp,unsafe_allow_html=True)
 
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
