@@ -173,12 +173,11 @@ if st.sidebar.button("Predict"):
 	col1, col2 ,col3= st.columns([1, 1,1])
 	grafica.empty()
 
-	
 	fig = go.Figure(go.Indicator(
    	 	mode = "gauge+number",
     	value = WQI,
     	domain = {'x': [0, 1], 'y': [0, 1]},
-    	title = {'text': "QWI", 'font': {'size': 32}},
+    	title = {'text': "WQI", 'font': {'size': 32}},
     	delta = {'reference':0, 'increasing': {'color': "RebeccaPurple"}},
     	#delta=valorprim_real,
     	gauge = {
@@ -197,6 +196,12 @@ if st.sidebar.button("Predict"):
 	fig.update_layout(paper_bgcolor = "white",  width=500,
     height=300,font = {'color': "darkblue", 'family': "Arial"})
 	col2.plotly_chart(fig)
+
+
+
+
+    
+
 
 
 
