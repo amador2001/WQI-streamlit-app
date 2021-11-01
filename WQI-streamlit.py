@@ -97,29 +97,29 @@ st.sidebar.header('Random initialized variables')
 # st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
 valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(0,100)))
 
-st.sidebar.subheader("Oxygene" + ": " + "1234")
+st.sidebar.subheader("Oxygene" + ": " + "")
 valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(0,100)))
 
-st.sidebar.subheader("pH" + ": " + "1234")
+st.sidebar.subheader("pH" + ": " + "")
 valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(0,100)))
 
-st.sidebar.subheader("TSS" + ": " + "1234")
+st.sidebar.subheader("TSS" + ": " + "")
 valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 
-st.sidebar.subheader("Temperature" + ": " + "1234")
+st.sidebar.subheader("Temperature" + ": " + "")
 valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(0,100)))
 
-st.sidebar.subheader("Turbidity" + ": " + "1234")
+st.sidebar.subheader("Turbidity" + ": " + "")
 valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 
-st.sidebar.subheader("TPN" + ": " + "1234")
+st.sidebar.subheader("TPN" + ": " + "")
 valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 
-st.sidebar.subheader("TP" + ": " + "1234")
+st.sidebar.subheader("TP" + ": " + "")
 valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 
 
-#st.sidebar.subheader("Target Free Lime" + ": " + "1234")
+#st.sidebar.subheader("" + ": " + "")
 #st.sidebar.subheader(": ".format(float(random.uniform(315.62,452.59))))
 #st.sidebar.write(0234)
 #valuefreelime=st.sidebar.slider(" ", 0.00,2.36 ,float(random.uniform(0.00,2.36)), step=0.1)
