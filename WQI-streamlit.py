@@ -78,15 +78,15 @@ grafica = st.image("images/scatter_plots.png")
 
 st.sidebar.header('Please, set observable water measurements')
 
-st.markdown("<h1 style='text-align: center; color: black;'>Water samples dataset</h1>", unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: center; color: black;'>Water samples dataset</h1>", unsafe_allow_html=True)
 
-data = pd.read_csv("ALH_w_dataset.csv")  # read a CSV file inside the 'data" folder next to 'app.py'
-# df = pd.read_excel(...)  # will work for Excel files
-# df.drop(columns=['Unnamed: 0'])
-st.text("")
-# st.title("Water samples dataset")  # add a title
-# st.text(" \n")
-st.write(data)
+# data = pd.read_csv("ALH_w_dataset.csv")  # read a CSV file inside the 'data" folder next to 'app.py'
+# # df = pd.read_excel(...)  # will work for Excel files
+# # df.drop(columns=['Unnamed: 0'])
+# st.text("")
+# # st.title("Water samples dataset")  # add a title
+# # st.text(" \n")
+# st.write(data)
 
 
 # -----------------------------  water -------
