@@ -96,28 +96,28 @@ st.sidebar.header('Random variables when modifying their value')
 
 
 # st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
-valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(0,100)))
+valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(30,100)))
 
 st.sidebar.subheader("Oxygene" + ": " + "")
-valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(0,100)))
+valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("pH" + ": " + "")
-valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(0,100)))
+valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("TSS" + ": " + "")
-valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
+valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(30,100)))
 
 st.sidebar.subheader("Temperature" + ": " + "")
-valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(0,100)))
+valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(10,100)))
 
 st.sidebar.subheader("Turbidity" + ": " + "")
-valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
+valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
 
 st.sidebar.subheader("TPN" + ": " + "")
-valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
+valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
 
 st.sidebar.subheader("TP" + ": " + "")
-valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
+valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
 
 
 #st.sidebar.subheader(": ".format(float(random.uniform(315.62,452.59))))
