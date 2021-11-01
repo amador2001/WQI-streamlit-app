@@ -9,7 +9,7 @@ from PIL import Image
 import base64
 import random
 from random import randrange, uniform
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
