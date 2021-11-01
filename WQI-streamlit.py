@@ -124,7 +124,7 @@ valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 #valuefreelime=st.sidebar.slider(" ", 0.00,2.36 ,float(random.uniform(0.00,2.36)), step=0.1)
 
 
-st.sidebar.header('Press "Predict" to compute Water Quality Index of the Measurement')
+st.sidebar.header('Press "Predict" to compute Water Quality Index of the Scenario')
 
 #v_custom=st.custom_slider('Hello world',0,100,50,key="slider1")
 #st.write(v_custom)
