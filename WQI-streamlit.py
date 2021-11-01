@@ -60,7 +60,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# st.image("xxxx.jpg")
+
+st.image("images/elgressy_one_logo.png")
 
 
 html_temp = """
