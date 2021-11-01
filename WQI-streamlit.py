@@ -5,7 +5,7 @@ import streamlit as st
 import numpy as np
 import pickle
 from PIL import Image
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import base64
 import random
 from random import randrange, uniform
