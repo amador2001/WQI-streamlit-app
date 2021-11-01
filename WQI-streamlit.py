@@ -76,7 +76,7 @@ st.subheader("Please press the PREDICT button below")
 
 grafica = st.image("images/scatter_plots.png")
 
-st.sidebar.header('Random initialized variables')
+st.sidebar.header('Random variables when modifying their value')
 
 # st.markdown("<h1 style='text-align: center; color: black;'>Water samples dataset</h1>", unsafe_allow_html=True)
 
@@ -119,13 +119,12 @@ st.sidebar.subheader("TP" + ": " + "")
 valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(0,100)))
 
 
-#st.sidebar.subheader("" + ": " + "")
 #st.sidebar.subheader(": ".format(float(random.uniform(315.62,452.59))))
 #st.sidebar.write(0234)
 #valuefreelime=st.sidebar.slider(" ", 0.00,2.36 ,float(random.uniform(0.00,2.36)), step=0.1)
 
 
-st.sidebar.header('Compute Water Quality Index of the Measurement')
+st.sidebar.header('Press "Predict" to compute Water Quality Index of the Measurement')
 
 #v_custom=st.custom_slider('Hello world',0,100,50,key="slider1")
 #st.write(v_custom)
