@@ -75,7 +75,7 @@ st.markdown(html_temp,unsafe_allow_html=True)
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
 st.subheader("Please press the PREDICT button below")
 
-grafica = st.image("images/scatter_plots.png")
+grafica = st.image("images/scatter_plots-2.png")
 
 st.sidebar.header('Random variables when modifying their value')
 
