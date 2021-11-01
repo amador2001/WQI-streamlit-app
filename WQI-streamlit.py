@@ -60,7 +60,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# st.image("logo_cemex.jpg")
+# st.image("xxxx.jpg")
 
 
 html_temp = """
@@ -72,11 +72,11 @@ html_temp = """
 st.markdown(html_temp,unsafe_allow_html=True)
 
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
-st.subheader("Titulo")
+st.subheader("Please press the PREDICT button below")
 
 grafica = st.image("images/scatter_plots.png")
 
-st.sidebar.header('Please, set observable water measurements')
+st.sidebar.header('Random initialized variables')
 
 # st.markdown("<h1 style='text-align: center; color: black;'>Water samples dataset</h1>", unsafe_allow_html=True)
 
@@ -94,7 +94,7 @@ st.sidebar.header('Please, set observable water measurements')
 
 
 
-st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
+# st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
 valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(0,100)))
 
 st.sidebar.subheader("Oxygene" + ": " + "1234")
