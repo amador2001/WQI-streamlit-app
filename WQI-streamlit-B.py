@@ -168,7 +168,10 @@ WQI = best_model.predict(min_max_scaler.transform([list_features]))[0]
 if st.sidebar.button("Predict"):
 
 
-	col1, col2 ,col3= st.columns([1, 1,1])
+	#col1, col2 ,col3= st.columns([1, 1,1])
+	col1, col2 = st.columns([1,2])
+
+	col1.metric("WQI: ", str(round(WQI)) + " %")
     
 	grafica.empty()
 
@@ -194,7 +197,7 @@ if st.sidebar.button("Predict"):
 
 	fig.update_layout(paper_bgcolor = "white",  width=500,
     height=300,font = {'color': "darkblue", 'family': "Arial"})
-	col2.plotly_chart(fig)
+	col1.plotly_chart(fig)
 
     #col2.metric("Temperature", "70 °F", "1.2 °F")
 	
