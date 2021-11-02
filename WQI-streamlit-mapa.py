@@ -231,6 +231,8 @@ if st.sidebar.button("Predict", key="1"):
     height=300,font = {'color': "darkblue", 'family': "Arial"})
 	col1.plotly_chart(fig)
 
+st.subheader("Map showing considered analysis stations")
+
     # --------------------------  MAPA -----------------
 
 #filtered_data2 = data_map[data_map["WQI"] > 92]
