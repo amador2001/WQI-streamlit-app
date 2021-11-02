@@ -96,29 +96,28 @@ st.sidebar.header('Random variables when modifying their value')
 
 
 # st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
-valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(97,77)))
+valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(30,100)))
 
 st.sidebar.subheader("Oxygene" + ": " + "")
-valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(92,79)))
+valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("pH" + ": " + "")
-valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(87,67)))
+valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("TSS" + ": " + "")
-valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(87,47)))
+valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(30,100)))
 
 st.sidebar.subheader("Temperature" + ": " + "")
-valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(88,64)))
-
-st.sidebar.subheader("TPN" + ": " + "")
-valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(66,100)))
-
-st.sidebar.subheader("TP" + ": " + "")
-valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(52,95)))
-
+valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(10,100)))
 
 st.sidebar.subheader("Turbidity" + ": " + "")
-valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(47,89)))
+valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
+
+st.sidebar.subheader("TPN" + ": " + "")
+valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
+
+st.sidebar.subheader("TP" + ": " + "")
+valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
 
 
 #st.sidebar.subheader(": ".format(float(random.uniform(315.62,452.59))))
@@ -152,8 +151,11 @@ min_max_scaler = pickle.load(open('min_max_scaler.pkl', 'rb'))
 #modelo_freelime=pickle.load(open('modelo_freelime.pkl','rb'))
 
 
+# en el formulario aparecen en DIFERENTE ORDEN DE INPUT VARS
+#list_features = [LSF,feed,free_lime_cat,fin,MS_rm]
+
 # recogemos los valores para meterlos al regresor best_model
-list_features = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb, ]
+list_features = [FC, Oxy, pH, TSS, Temperature, Turb, TPN, TP ]
 #list_features = [0.5, 0.5,0.5,0.5,0.5,0.5,0.5,0.5 ]
 
 print("list_features = ", list_features)

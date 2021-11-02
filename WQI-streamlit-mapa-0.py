@@ -75,7 +75,30 @@ st.markdown(html_temp,unsafe_allow_html=True)
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
 st.subheader("Please press the PREDICT button below")
 
-grafica = st.image("images/scatter_plots-3.png")
+# grafica = st.image("images/scatter_plots-3.png") -----------------
+
+# --------------------------  MAPA -------------------------------
+data_map = pd.read_csv ('ALH_w_dataset-map.csv')
+#import plotly.graph_objects as go
+
+data_map['text'] = data_map['Station'] + '' + 'WQI: ' + data_map['WQI'].astype(str)
+
+fig = go.Figure(data=go.Scattergeo(
+        lon = data_map['Lon'],
+        lat = data_map['Lat'],
+        text = data_map['text'],
+        mode = 'markers',
+        marker_color = data_map['WQI'],
+        ))
+
+fig.update_layout(
+        title = 'Model trained with the Water Quality Dataset waterqualitydata.us',
+        geo_scope='usa',
+        width=800, height=400,
+    )
+#fig.show()
+mapa= st.plotly_chart(fig)
+# --------------------------  fin MAPA -------------------------------
 
 st.sidebar.header('Random variables when modifying their value')
 
@@ -96,29 +119,28 @@ st.sidebar.header('Random variables when modifying their value')
 
 
 # st.sidebar.subheader("WQI FC" + ": " + "Random Inizialized")
-valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(97,77)))
+valueFC = st.sidebar.slider("", 0.0 , 100.0 ,float(random.uniform(30,100)))
 
 st.sidebar.subheader("Oxygene" + ": " + "")
-valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(92,79)))
+valueOxy = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("pH" + ": " + "")
-valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(87,67)))
+valuepH = st.sidebar.slider("", 0.0 , 100.0, float(random.uniform(30,100)))
 
 st.sidebar.subheader("TSS" + ": " + "")
-valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(87,47)))
+valueTSS = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(30,100)))
 
 st.sidebar.subheader("Temperature" + ": " + "")
-valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(88,64)))
-
-st.sidebar.subheader("TPN" + ": " + "")
-valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(66,100)))
-
-st.sidebar.subheader("TP" + ": " + "")
-valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(52,95)))
-
+valueTemperature = st.sidebar.slider("",0.0 , 100.0, float(random.uniform(10,100)))
 
 st.sidebar.subheader("Turbidity" + ": " + "")
-valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(47,89)))
+valueTurb = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
+
+st.sidebar.subheader("TPN" + ": " + "")
+valueTPN = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
+
+st.sidebar.subheader("TP" + ": " + "")
+valueTP = st.sidebar.slider("", 0.0 , 100.0 , float(random.uniform(10,100)))
 
 
 #st.sidebar.subheader(": ".format(float(random.uniform(315.62,452.59))))
@@ -152,8 +174,11 @@ min_max_scaler = pickle.load(open('min_max_scaler.pkl', 'rb'))
 #modelo_freelime=pickle.load(open('modelo_freelime.pkl','rb'))
 
 
+# en el formulario aparecen en DIFERENTE ORDEN DE INPUT VARS
+#list_features = [LSF,feed,free_lime_cat,fin,MS_rm]
+
 # recogemos los valores para meterlos al regresor best_model
-list_features = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb, ]
+list_features = [FC, Oxy, pH, TSS, Temperature, Turb, TPN, TP ]
 #list_features = [0.5, 0.5,0.5,0.5,0.5,0.5,0.5,0.5 ]
 
 print("list_features = ", list_features)
@@ -169,7 +194,8 @@ if st.sidebar.button("Predict"):
 
 
 	col1, col2 ,col3= st.columns([1, 1,1])
-	grafica.empty()
+	# grafica.empty()
+    #st.plotly_chart(fig, config={'displayModeBar': False})
 
 	fig = go.Figure(go.Indicator(
    	 	mode = "gauge+number",
@@ -193,7 +219,7 @@ if st.sidebar.button("Predict"):
 
 	fig.update_layout(paper_bgcolor = "white",  width=500,
     height=300,font = {'color': "darkblue", 'family': "Arial"})
-	col2.plotly_chart(fig)
+	col1.plotly_chart(fig)
 
 
 
