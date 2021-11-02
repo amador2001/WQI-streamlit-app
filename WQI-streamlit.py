@@ -153,7 +153,7 @@ min_max_scaler = pickle.load(open('min_max_scaler.pkl', 'rb'))
 
 
 # recogemos los valores para meterlos al regresor best_model
-list_features = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb, ]
+list_features = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb ]
 #list_features = [0.5, 0.5,0.5,0.5,0.5,0.5,0.5,0.5 ]
 
 print("list_features = ", list_features)
