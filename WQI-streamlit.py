@@ -73,7 +73,7 @@ html_temp = """
 st.markdown(html_temp,unsafe_allow_html=True)
 
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
-st.subheader("Please press the PREDICT button below")
+st.caption("Please press the PREDICT button below2")
 
 grafica = st.image("images/scatter_plots-3.png")
 
@@ -169,7 +169,7 @@ if st.sidebar.button("Predict"):
 
 
 	col1, col2 ,col3= st.columns([1, 1,1])
-    
+
 	grafica.empty()
 
 	fig = go.Figure(go.Indicator(
