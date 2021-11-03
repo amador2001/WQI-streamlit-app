@@ -70,7 +70,7 @@ html_temp = """
 st.markdown(html_temp,unsafe_allow_html=True)
 
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
-st.subheader("Training model based on https://www.waterqualitydata.us")
+st.caption("Training model based on https://www.waterqualitydata.us")
 st.caption("Please press the PREDICT button below to run prediction of the input variables")
 
 
