@@ -73,7 +73,7 @@ html_temp = """
 st.markdown(html_temp,unsafe_allow_html=True)
 
 boton="""<button style="height:50px; width=100px;">Predict</button>"""
-st.caption("Please press the PREDICT button below2")
+st.caption("Please press the PREDICT button below")
 
 grafica = st.image("images/scatter_plots-3.png")
 
