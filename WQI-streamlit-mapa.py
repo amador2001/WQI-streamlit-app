@@ -233,7 +233,7 @@ if st.sidebar.button("Predict", key="1"):
     height=300,font = {'color': "darkblue", 'family': "Arial"})
 	col1.plotly_chart(fig)
 
-st.caption("Map showing considered analysis stations")
+st.caption("Map showing considered analysis stations2")
 
     # --------------------------  MAPA -----------------
 
