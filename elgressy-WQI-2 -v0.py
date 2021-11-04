@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
-
+from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
@@ -24,11 +24,6 @@ target = pd.read_csv(io.StringIO(download_2.decode('utf-8')))
 data = features.merge(target, how='inner', left_index=True, right_index=True)
 
 lista_cat = ["Poor", "Marginal","Fair","Good", "Excellent" ]  # para corresponderse con 0,1,2,3,4
-
-# este data_0 se usa para las GRAFICAS PLOTLY que necesitan acceder al dataframe de input + outputs numericos
-url_data_0 ="https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/data_0.csv"
-download_3 = requests.get(url_data_0).content
-data_0 = pd.read_csv(io.StringIO(download_3.decode('utf-8')))
 
 # # dividimos ambos dataframes en sus sibconjuntos train and test
 x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.2, stratify=target)
@@ -122,12 +117,7 @@ class StreamlitApp:
             textfont_size=15
         )
         return fig   
-# -----------------------------------------------------------
-    def plot_scatter(self, var_x, var_y):
-        #fig2 = px.scatter(data_0, x="TPN", y="WQI")
-        fig2 = px.scatter(data_0, x=var_x, y=var_y)
-        return fig2 
-#-----------------------------------------------------------
+
     def construct_app(self):
 
         st.image("images/elgressy_one_logo-2.png")
@@ -219,43 +209,11 @@ class StreamlitApp:
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # --------------------------------------------------------------
-        column_2.markdown(
-            '<p class="font-style" > Some Variables Dependencies  </p>',
-            unsafe_allow_html=True
-        )
-
-
-        # --------------------------------------------------------------
-        import plotly.express as px
-        fig2 = px.scatter(data_0, x="TPN", y="WQI", hover_name='Turb')
-        st.plotly_chart(fig2, use_container_width=True)
-
-        # --------------------------------------------------------------
-
-        fig3 = px.scatter(data_0, x="Turb", y="WQI", hover_name='TPN')
-        st.plotly_chart(fig3, use_container_width=True)
-
-        # --------------------------------------------------------------
-        fig4 = px.scatter(data_0, x="pH", y="WQI", hover_name='TPN')
-        st.plotly_chart(fig4, use_container_width=True)
-
-        # # Graphing Function #####
-        # fig5 = go.Figure(data=[go.Surface(z="WQI", x="pH", y="TPN")])
-        # fig5.update_layout(title='IRR', autosize=False,
-        #                   width=800, height=800,
-        #                   margin=dict(l=40, r=40, b=40, t=40))
-        # st.plotly_chart(fig5, use_container_width=True)
-
-
-       
-
-    
-    
-
         return self
 # --------------------------------------------------------------
-
+# import plotly.express as px
+# fig = px.scatter(data, x="WQI TPN", y="Overall WQI")
+# fig.show()
 
 
 
