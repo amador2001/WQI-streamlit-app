@@ -6,10 +6,11 @@ from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
+import pickle
+
 # necesario para bajar de github
 import requests
 import io
-
 
 #importamos los dataframes features y target de github
 url_features = "https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/features.csv?token=ACPSY65VY4AVIMWMCTYAEYDBQKXZI" # Make sure the url is the raw version of the file on GitHub
@@ -20,7 +21,9 @@ url_target ="https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/mast
 download_2 = requests.get(url_target).content
 target = pd.read_csv(io.StringIO(download_2.decode('utf-8')))
 
-lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
+data = features.merge(target, how='inner', left_index=True, right_index=True)
+
+lista_cat = ["Poor", "Marginal","Fair","Good", "Excellent" ]  # para corresponderse con 0,1,2,3,4
 
 # # dividimos ambos dataframes en sus sibconjuntos train and test
 x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.2, stratify=target)
@@ -97,8 +100,6 @@ class StreamlitApp:
             sorted(features[cols[7]].unique())
         )
 
-
-        #values = [sepal_length, sepal_width, petal_length, petal_width]
         values = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb ]
 
         return values
@@ -106,7 +107,6 @@ class StreamlitApp:
     def plot_pie_chart(self, probabilities):
         fig = go.Figure(
             data=[go.Pie(
-                    #labels=list(iris_data.target_names), # categorias target
                     labels=lista_cat,
                     values=probabilities[0]
             )]
@@ -116,13 +116,13 @@ class StreamlitApp:
             textinfo='value',
             textfont_size=15
         )
-        return fig
+        return fig   
 
     def construct_app(self):
 
         st.image("images/elgressy_one_logo-2.png")
 
-        # ejecutamos funcion de entrenar datos 
+        # --------- ejecutamos funcion de entrenar datos del CLASIFICADOR -----------
         self.train_data()
         # recogemos los 8 valores de los inputs del sidebar
         values = self.construct_sidebar()
@@ -130,26 +130,27 @@ class StreamlitApp:
 
         # los metemos dentro de una lista [] para pasarlos al clasificador
         values_to_predict = np.array(values).reshape(1, -1) 
+        #values_to_predict = [[91, 85, 95, 78, 81, 99, 84, 69]]  # para chequeo
         print("values_to_predict = ", values_to_predict)  # ya metidos en una lista los inputs
 
         prediction = self.model.predict(values_to_predict)  # la prediccion
         print("prediction = ", prediction)
 
-        
-
         prediction_str = lista_cat[prediction[0]]
         print("prediction_str = ", prediction_str)
 
-        #--------------------------------------------------
-        # precition[[0]] no es mas que el indice de la categoria predicha: p.e. la 3
-        # iris_data.target_names no es mas que lista_cat, la LISTA DE CATEGORIAS
-        # iris_data.target_names[prediction[0]] no es más que la categoria predicha, p.e. "Fair" 
-
-        # por eso la sacamos de la lista con 
-        #prediction_str = iris_data.target_names[prediction[0]]
-        
-
         probabilities = self.model.predict_proba(values_to_predict)
+
+        # -------  ejecutamos funcion de entrenar datos del REGRESOR WQI -----------
+        xgb = pickle.load(open('modelo_XGBRegressor.pkl', 'rb'))
+        #prediccion_QWI = round(xgb.predict([[90, 95, 63, 83, 97, 96, 80, 80]])[0][0])  # Asi se usa
+        prediccion_QWI = round(xgb.predict(values_to_predict)[0][0])
+        print("prediccion_QWI = ", prediccion_QWI)
+
+
+
+        # ---  FIN PREDICCIONES ----------------------------------------------------- 
+
 
         st.markdown(
             """
@@ -179,7 +180,9 @@ class StreamlitApp:
             unsafe_allow_html=True
         )
 
-        column_1, column_2 = st.columns(2)
+        #column_1, column_2 = st.columns(2)
+        column_1, column_2, column_3 = st.columns(3)
+
         column_1.markdown(
             f'<p class="font-style" >Prediction </p>',
             unsafe_allow_html=True
@@ -192,6 +195,13 @@ class StreamlitApp:
         )
         column_2.write(f"{probabilities[0][prediction[0]]}")
 
+
+        column_3.markdown(
+            '<p class="font-style" >WQI</p>',
+            unsafe_allow_html=True
+        )
+        column_3.write(f"{prediccion_QWI}")
+
         fig = self.plot_pie_chart(probabilities)
         st.markdown(
             '<p class="font-style" >Probability Distribution</p>',
@@ -200,6 +210,12 @@ class StreamlitApp:
         st.plotly_chart(fig, use_container_width=True)
 
         return self
+# --------------------------------------------------------------
+# import plotly.express as px
+# fig = px.scatter(data, x="WQI TPN", y="Overall WQI")
+# fig.show()
+
+
 
 
 sa = StreamlitApp()
