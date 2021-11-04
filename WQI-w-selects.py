@@ -94,19 +94,19 @@ class StreamlitApp:
 
         return values
 
-    def plot_pie_chart(self, probabilities):
-        fig = go.Figure(
-            data=[go.Pie(
-                    labels=list(iris_data.target_names), # categorias target
-                    values=probabilities[0]
-            )]
-        )
-        fig = fig.update_traces(
-            hoverinfo='label+percent',
-            textinfo='value',
-            textfont_size=15
-        )
-        return fig
+    # def plot_pie_chart(self, probabilities):
+    #     fig = go.Figure(
+    #         data=[go.Pie(
+    #                 labels=list(iris_data.target_names), # categorias target
+    #                 values=probabilities[0]
+    #         )]
+    #     )
+    #     fig = fig.update_traces(
+    #         hoverinfo='label+percent',
+    #         textinfo='value',
+    #         textfont_size=15
+    #     )
+    #     return fig
 
     def construct_app(self):
 
@@ -118,9 +118,9 @@ class StreamlitApp:
 
         # los metemos dentro de una lista [] para pasarlos al clasificador
         values_to_predict = np.array(values).reshape(1, -1) 
-        print("values_to_predict = ", values_to_predict)
+        print("values_to_predict = ", values_to_predict)  # ya metidos en una lista los inputs
 
-        prediction = self.model.predict(values_to_predict)
+        prediction = self.model.predict(values_to_predict)  
         print("prediction = ", prediction)
 
         lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
@@ -180,12 +180,12 @@ class StreamlitApp:
         )
         column_2.write(f"{probabilities[0][prediction[0]]}")
 
-        fig = self.plot_pie_chart(probabilities)
+        #fig = self.plot_pie_chart(probabilities)
         st.markdown(
             '<p class="font-style" >Probability Distribution</p>',
             unsafe_allow_html=True
         )
-        st.plotly_chart(fig, use_container_width=True)
+        # st.plotly_chart(fig, use_container_width=True)
 
         return self
 
