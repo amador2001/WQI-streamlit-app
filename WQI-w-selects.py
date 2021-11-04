@@ -10,9 +10,6 @@ from sklearn.model_selection import train_test_split
 import requests
 import io
 
-
-# iris_data = load_iris()
-
 #importamos los dataframes features y target de github
 url_features = "https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/features.csv?token=ACPSY65VY4AVIMWMCTYAEYDBQKXZI" # Make sure the url is the raw version of the file on GitHub
 download = requests.get(url_features).content
@@ -21,6 +18,8 @@ features = pd.read_csv(io.StringIO(download.decode('utf-8')))
 url_target ="https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/target.csv?token=ACPSY63PWCLKYMNAE26KMBDBQK6DY"
 download_2 = requests.get(url_target).content
 target = pd.read_csv(io.StringIO(download_2.decode('utf-8')))
+
+data = features.merge(target, how='inner', left_index=True, right_index=True)
 
 lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
 
@@ -99,8 +98,6 @@ class StreamlitApp:
             sorted(features[cols[7]].unique())
         )
 
-
-        #values = [sepal_length, sepal_width, petal_length, petal_width]
         values = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb ]
 
         return values
@@ -108,7 +105,6 @@ class StreamlitApp:
     def plot_pie_chart(self, probabilities):
         fig = go.Figure(
             data=[go.Pie(
-                    #labels=list(iris_data.target_names), # categorias target
                     labels=lista_cat,
                     values=probabilities[0]
             )]
@@ -118,7 +114,7 @@ class StreamlitApp:
             textinfo='value',
             textfont_size=15
         )
-        return fig
+        return fig   
 
     def construct_app(self):
 
@@ -149,7 +145,7 @@ class StreamlitApp:
 
         # por eso la sacamos de la lista con 
         #prediction_str = iris_data.target_names[prediction[0]]
-        
+        #--------------------------------------------------
 
         probabilities = self.model.predict_proba(values_to_predict)
 
@@ -202,6 +198,9 @@ class StreamlitApp:
         st.plotly_chart(fig, use_container_width=True)
 
         return self
+# --------------------------------------------------------------
+
+
 
 
 sa = StreamlitApp()

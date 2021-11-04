@@ -11,8 +11,6 @@ import requests
 import io
 
 
-# iris_data = load_iris()
-
 #importamos los dataframes features y target de github
 url_features = "https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/features.csv?token=ACPSY65VY4AVIMWMCTYAEYDBQKXZI" # Make sure the url is the raw version of the file on GitHub
 download = requests.get(url_features).content
@@ -52,7 +50,7 @@ class StreamlitApp:
         )
         FC = st.sidebar.selectbox(
             #f"Select {cols[0]}",
-            f"Select Phosphorus (TP) Level",
+            f"Select Phosphorus (FC) Level",
             sorted(features[cols[0]].unique())
         )
 
