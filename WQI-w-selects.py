@@ -214,20 +214,24 @@ class StreamlitApp:
 
         fig = self.plot_pie_chart(probabilities)
         st.markdown(
-            '<p class="font-style" >Probability Distribution</p>',
+            '<p class="font-style" >Probability Distribution and Variables Dependencies</p>',
             unsafe_allow_html=True
         )
         st.plotly_chart(fig, use_container_width=True)
 
         # --------------------------------------------------------------
-        column_2.markdown(
-            '<p class="font-style" > Some Variables Dependencies  </p>',
-            unsafe_allow_html=True
-        )
+        # column_2.markdown(
+        #     '<p class="font-style" > Some Variables Dependencies  </p>',
+        #     unsafe_allow_html=True
+        # )
 
-
-        # --------------------------------------------------------------
         import plotly.express as px
+
+        fig5 = px.scatter(data_0, x="pH", y="Turb", color="quality_cat_names",size='Temp', hover_data=['TPN'])
+        st.plotly_chart(fig5, use_container_width=True)
+ 
+        # --------------------------------------------------------------
+        
         fig2 = px.scatter(data_0, x="TPN", y="WQI", hover_name='Turb')
         st.plotly_chart(fig2, use_container_width=True)
 
@@ -240,12 +244,8 @@ class StreamlitApp:
         fig4 = px.scatter(data_0, x="pH", y="WQI", hover_name='TPN')
         st.plotly_chart(fig4, use_container_width=True)
 
-        # # Graphing Function #####
-        # fig5 = go.Figure(data=[go.Surface(z="WQI", x="pH", y="TPN")])
-        # fig5.update_layout(title='IRR', autosize=False,
-        #                   width=800, height=800,
-        #                   margin=dict(l=40, r=40, b=40, t=40))
-        # st.plotly_chart(fig5, use_container_width=True)
+
+
 
 
        
