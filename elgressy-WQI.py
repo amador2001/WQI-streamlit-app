@@ -6,6 +6,8 @@ from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
+from xgboost import XGBRegressor
+
 import pickle
 
 # necesario para bajar de github
