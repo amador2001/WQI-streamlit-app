@@ -22,8 +22,6 @@ url_target ="https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/mast
 download_2 = requests.get(url_target).content
 target = pd.read_csv(io.StringIO(download_2.decode('utf-8')))
 
-lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
-
 # # dividimos ambos dataframes en sus sibconjuntos train and test
 x_train, x_test, y_train, y_test = train_test_split(features, target, test_size=0.2, stratify=target)
 
@@ -47,55 +45,46 @@ class StreamlitApp:
         # Para cada uno de los inputs vamos extrayendo los valores UNICOS 
 
         st.sidebar.markdown(
-            '<p class="subheader-style">Please, set the observable values</p>',
+            '<p class="subheader-style">Water Quality Prediction</p>',
             unsafe_allow_html=True
         )
         FC = st.sidebar.selectbox(
-            #f"Select {cols[0]}",
-            f"Select Phosphorus (TP) Level",
+            f"Select {cols[0]}",
             sorted(features[cols[0]].unique())
         )
 
         Oxy = st.sidebar.selectbox(
-            #f"Select {cols[1]}",
-            f"Select Oxygene Level",
-             
+            f"Select {cols[1]}",
             sorted(features[cols[1]].unique())
         )
 
         pH = st.sidebar.selectbox(
-            #f"Select {cols[2]}",
-            f"Select pH",
+            f"Select {cols[2]}",
             sorted(features[cols[2]].unique())
         )
 
         TSS = st.sidebar.selectbox(
-            #f"Select {cols[3]}",
-            f"Select Total Suspended Sediment",
+            f"Select {cols[3]}",
             sorted(features[cols[3]].unique())
         )
 
         Temperature = st.sidebar.selectbox(
-            #f"Select {cols[4]}",
-            f"Select Temperature",
+            f"Select {cols[4]}",
             sorted(features[cols[4]].unique())
         )
 
         TPN = st.sidebar.selectbox(
-            #f"Select {cols[5]}",
-             f"Select Nitrogen (TPN)",
+            f"Select {cols[5]}",
             sorted(features[cols[5]].unique())
         )
 
         TP = st.sidebar.selectbox(
-            #"Select {cols[6]}",
-            f"Select  TP",
+            f"Select {cols[6]}",
             sorted(features[cols[6]].unique())
         )
 
         Turb = st.sidebar.selectbox(
-            #f"Select {cols[7]}",
-            f"Select  Turbidity",
+            f"Select {cols[7]}",
             sorted(features[cols[7]].unique())
         )
 
@@ -105,20 +94,19 @@ class StreamlitApp:
 
         return values
 
-    def plot_pie_chart(self, probabilities):
-        fig = go.Figure(
-            data=[go.Pie(
-                    #labels=list(iris_data.target_names), # categorias target
-                    labels=lista_cat,
-                    values=probabilities[0]
-            )]
-        )
-        fig = fig.update_traces(
-            hoverinfo='label+percent',
-            textinfo='value',
-            textfont_size=15
-        )
-        return fig
+    # def plot_pie_chart(self, probabilities):
+    #     fig = go.Figure(
+    #         data=[go.Pie(
+    #                 labels=list(iris_data.target_names), # categorias target
+    #                 values=probabilities[0]
+    #         )]
+    #     )
+    #     fig = fig.update_traces(
+    #         hoverinfo='label+percent',
+    #         textinfo='value',
+    #         textfont_size=15
+    #     )
+    #     return fig
 
     def construct_app(self):
 
@@ -137,7 +125,7 @@ class StreamlitApp:
         prediction = self.model.predict(values_to_predict)  # la prediccion
         print("prediction = ", prediction)
 
-        
+        lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
 
         prediction_str = lista_cat[prediction[0]]
         print("prediction_str = ", prediction_str)
@@ -194,12 +182,12 @@ class StreamlitApp:
         )
         column_2.write(f"{probabilities[0][prediction[0]]}")
 
-        fig = self.plot_pie_chart(probabilities)
+        #fig = self.plot_pie_chart(probabilities)
         st.markdown(
             '<p class="font-style" >Probability Distribution</p>',
             unsafe_allow_html=True
         )
-        st.plotly_chart(fig, use_container_width=True)
+        # st.plotly_chart(fig, use_container_width=True)
 
         return self
 
