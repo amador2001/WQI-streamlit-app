@@ -10,8 +10,8 @@ from sklearn.model_selection import train_test_split
 import requests
 import io
 
+lista_cat = ["Poor", "Marginal","Fair","Good", "Excellent" ]  # para corresponderse con 0,1,2,3,4
 
-# iris_data = load_iris()
 
 #importamos los dataframes features y target de github
 url_features = "https://raw.githubusercontent.com/amador2001/WQI-streamlit-app/master/features.csv?token=ACPSY65VY4AVIMWMCTYAEYDBQKXZI" # Make sure the url is the raw version of the file on GitHub
@@ -122,8 +122,6 @@ class StreamlitApp:
 
         prediction = self.model.predict(values_to_predict)  # la prediccion
         print("prediction = ", prediction)
-
-        lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
 
         prediction_str = lista_cat[prediction[0]]
         print("prediction_str = ", prediction_str)
