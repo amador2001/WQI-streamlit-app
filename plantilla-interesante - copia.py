@@ -78,15 +78,11 @@ class StreamlitApp:
 
         self.train_data()
         values = self.construct_sidebar()
-        print("values = ", values)
 
         values_to_predict = np.array(values).reshape(1, -1)
-        print("values_to_predict = ", values_to_predict)
 
         prediction = self.model.predict(values_to_predict)
         prediction_str = iris_data.target_names[prediction[0]]
-        print("prediction[0] = ", prediction[0] )
-        print("prediction_str = ", prediction_str)
         probabilities = self.model.predict_proba(values_to_predict)
 
         st.markdown(

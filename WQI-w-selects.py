@@ -42,60 +42,62 @@ class StreamlitApp:
 
         cols = [col for col in features.columns]
 
+        # Para cada uno de los inputs vamos extrayendo los valores UNICOS 
+
         st.sidebar.markdown(
             '<p class="header-style">Water Quality Prediction</p>',
             unsafe_allow_html=True
         )
-        valueFC = st.sidebar.selectbox(
+        FC = st.sidebar.selectbox(
             f"Select {cols[0]}",
             sorted(features[cols[0]].unique())
         )
 
-        valueOxy = st.sidebar.selectbox(
+        Oxy = st.sidebar.selectbox(
             f"Select {cols[1]}",
             sorted(features[cols[1]].unique())
         )
 
-        valuepH = st.sidebar.selectbox(
+        pH = st.sidebar.selectbox(
             f"Select {cols[2]}",
             sorted(features[cols[2]].unique())
         )
 
-        valueTSS = st.sidebar.selectbox(
+        TSS = st.sidebar.selectbox(
             f"Select {cols[3]}",
             sorted(features[cols[3]].unique())
         )
 
-        valueTemperature = st.sidebar.selectbox(
+        Temperature = st.sidebar.selectbox(
             f"Select {cols[4]}",
             sorted(features[cols[4]].unique())
         )
 
-        valueTPN = st.sidebar.selectbox(
+        TPN = st.sidebar.selectbox(
             f"Select {cols[5]}",
             sorted(features[cols[5]].unique())
         )
 
-        valueTP = st.sidebar.selectbox(
+        TP = st.sidebar.selectbox(
             f"Select {cols[6]}",
             sorted(features[cols[6]].unique())
         )
 
-        valueTurb = st.sidebar.selectbox(
+        Turb = st.sidebar.selectbox(
             f"Select {cols[7]}",
             sorted(features[cols[7]].unique())
         )
 
 
         #values = [sepal_length, sepal_width, petal_length, petal_width]
-        values = [[FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb ]]
+        values = [FC, Oxy, pH, TSS, Temperature, TPN, TP,Turb ]
 
         return values
 
     def plot_pie_chart(self, probabilities):
         fig = go.Figure(
             data=[go.Pie(
-                    labels=list(iris_data.target_names),
+                    labels=list(iris_data.target_names), # categorias target
                     values=probabilities[0]
             )]
         )
@@ -108,13 +110,33 @@ class StreamlitApp:
 
     def construct_app(self):
 
+        # ejecutamos funcion de entrenar datos 
         self.train_data()
+        # recogemos los 8 valores de los inputs del sidebar
         values = self.construct_sidebar()
+        print("values = ", values)
 
-        values_to_predict = np.array(values).reshape(1, -1)
+        # los metemos dentro de una lista [] para pasarlos al clasificador
+        values_to_predict = np.array(values).reshape(1, -1) 
+        print("values_to_predict = ", values_to_predict)
 
         prediction = self.model.predict(values_to_predict)
-        prediction_str = iris_data.target_names[prediction[0]]
+        print("prediction = ", prediction)
+
+        lista_cat = ["Excellent", "Good", "Fair", "Marginal", "Poor"]
+
+        prediction_str = lista_cat[prediction[0]]
+        #print("prediction_str = ", prediction_str)
+
+        #--------------------------------------------------
+        # precition[[0]] no es mas que el indice de la categoria predicha: p.e. la 3
+        # iris_data.target_names no es mas que lista_cat, la LISTA DE CATEGORIAS
+        # iris_data.target_names[prediction[0]] no es más que la categoria predicha, p.e. "Fair" 
+
+        # por eso la sacamos de la lista con 
+        #prediction_str = iris_data.target_names[prediction[0]]
+        
+
         probabilities = self.model.predict_proba(values_to_predict)
 
         st.markdown(
@@ -141,7 +163,7 @@ class StreamlitApp:
             unsafe_allow_html=True
         )
         st.markdown(
-            '<p class="header-style"> Iris Data Predictions </p>',
+            '<p class="header-style"> Water Quality Prediction  </p>',
             unsafe_allow_html=True
         )
 
